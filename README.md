@@ -138,9 +138,6 @@ Aquí se ilustra el flujo de datos y la interacción entre los diferentes compon
 
 Este diagrama ilustra las interacciones y el flujo de datos entre los distintos componentes del sistema de monitoreo y control IoT, desde la lectura de sensores hasta la visualización, control y persistencia de datos.
 
-![Modelo Conceptual](images/mcmqtt.png)
-
-
 Participantes Clave:
 
 - ESP32: El microcontrolador que actúa como dispositivo IoT, leyendo sensores y controlando actuadores.
@@ -150,6 +147,8 @@ Participantes Clave:
 Supabase DB: La base de datos en la nube donde se almacenan los registros de los sensores de forma persistente.
 - Usuario: La persona que interactúa con las interfaces web y móvil.
 - Actuador LED (en ESP32): El componente físico controlado por el ESP32.
+
+![Modelo Conceptual](images/mcmqtt.png)
 
 Descripción Detallada del Flujo (Numeración según el Diagrama):
 
@@ -161,7 +160,7 @@ Descripción Detallada del Flujo (Numeración según el Diagrama):
 
 ## Paso 2. Lectura de Sensores y Publicación MQTT:
 
-- 2 . ESP32 Publica Temperatura y Humedad: El ESP32 lee la temperatura y humedad del sensor DHT22 y publica el valor al MQTT Broker en un tópico específico, por ejemplo, sensores/esp32_1/temperatura.
+- 2. ESP32 Publica Temperatura y Humedad: El ESP32 lee la temperatura y humedad del sensor DHT22 y publica el valor al MQTT Broker en un tópico específico, por ejemplo, sensores/esp32_1/temperatura.
 
 ## Paso 3. Recepción, Visualización y Almacenamiento de Datos:
 
@@ -171,5 +170,5 @@ Descripción Detallada del Flujo (Numeración según el Diagrama):
 
 - 3c. Cliente Móvil Actualiza UI: El Cliente Móvil procesa los datos y actualiza su interfaz de usuario para mostrar la temperatura y humedad.
 
-- 3e. Frontend Web Inserta en Supabase: Además de mostrar los datos, el Frontend Web inserta un nuevo registro en la tabla measurements de Supabase, incluyendo la temperatura, humedad, y el ID del dispositivo.
+- 3d. Frontend Web Inserta en Supabase: Además de mostrar los datos, el Frontend Web inserta un nuevo registro en la tabla measurements de Supabase, incluyendo la temperatura, humedad, y el ID del dispositivo.
 
