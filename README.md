@@ -153,17 +153,17 @@ Supabase DB: La base de datos en la nube donde se almacenan los registros de los
 
 Descripción Detallada del Flujo (Numeración según el Diagrama):
 
-1. Establecimiento de Conexiones y Suscripciones:
+## Paso 1. Establecimiento de Conexiones y Suscripciones:
 
 - 1a. Frontend Web se Conecta y Suscribe: El Frontend Web inicia una conexión segura (WSS) con el MQTT Broker (EMQX) y se suscribe al tópico genérico sensores/# para recibir datos de temperatura y humedad de cualquier dispositivo. Aqui también el Frontend Web es capaz de apagar el LED remotamente. 
 - 1b. Cliente Móvil se Conecta y Suscribe: De manera similar, el Cliente Móvil establece su conexión segura con el MQTT Broker y se suscribe al mismo tópico sensores/# para monitorear los datos.
 - 1c. ESP32 se Conecta: El microcontrolador ESP32 establece una conexión con el MQTT Broker para iniciar la comunicación.
 
-2. Lectura de Sensores y Publicación MQTT:
+## Paso 2. Lectura de Sensores y Publicación MQTT:
 
-- 2. ESP32 Publica Temperatura y Humedad: El ESP32 lee la temperatura y humedad del sensor DHT22 y publica el valor al MQTT Broker en un tópico específico, por ejemplo, sensores/esp32_1/temperatura.
+- 2 . ESP32 Publica Temperatura y Humedad: El ESP32 lee la temperatura y humedad del sensor DHT22 y publica el valor al MQTT Broker en un tópico específico, por ejemplo, sensores/esp32_1/temperatura.
 
-3. Recepción, Visualización y Almacenamiento de Datos:
+## Paso 3. Recepción, Visualización y Almacenamiento de Datos:
 
 - 3a. Broker Envía a Frontend Web y al Cliente Móvil: El MQTT Broker reenvía el mensaje de temperatura y humedad al Frontend Web y al Cliente Móvil, ya que están suscritos al tópico.
 
