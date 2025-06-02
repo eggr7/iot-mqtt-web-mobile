@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="/mqtt-wildcards/" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Monitor MQTT</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+<body>
+    <h1>📡 Monitor de Temperatura y Humedad</h1>
+
+    <h2>💡 & Control de LED</h2>
+    <p style="color: gray;">(El control se incluye en cada sensor detectado)</p>
+
+    <hr>
+
+    <h2>📋 Sensores Dinámicos con Wildcards</h2>
+    <div id="sensores-container">
+        <p id="sin-sensores">🔍 Esperando datos de sensores...</p>
+    </div>
+
+    <div id="chart-container">
+        <canvas id="tempChart"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

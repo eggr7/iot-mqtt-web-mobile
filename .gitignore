@@ -1,0 +1,15 @@
+# Archivos sensibles
+.env
+.env.local
+*.env.*
+config.js
+
+# Carpetas auxiliares
+/node_modules
+/dist
+/build
+/logs
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
