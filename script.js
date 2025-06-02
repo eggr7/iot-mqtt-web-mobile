@@ -110,12 +110,20 @@ client.on("message", async (topic, message) => {
   const payload  = message.toString();
 
 //Evitamos procesar mensajes de ambiente u otros valores no deseados
-  if (!deviceId || deviceId === "ambiente") return;
+  if (!deviceId || deviceId.trim() === "" || deviceId === "ambiente") return;
 
 
   if (dataType === "temperatura" || dataType === "humedad") {
-    const obj   = JSON.parse(payload);
+    let obj;
+    try {
+        obj = JSON.parse(payload);
+    } catch (e){
+        console.warn("Payload inválido JSON:", payload);
+        return;
+    }
+
     const value = obj[dataType];
+    if (typeof value !== "number") return;
     const container = getDeviceContainer(deviceId);
 
     // 1) Actualiza la User Interface
