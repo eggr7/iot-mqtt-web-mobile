@@ -31,56 +31,45 @@ h1 {
     flex: 1;
     max-width: calc(50% - 10px);
 
-    /* NUEVOS ESTILOS PARA LA DISTRIBUCIÓN INTERNA DEL PANEL */
-    display: flex; /* Habilita flexbox para el contenido interno */
-    flex-direction: column; /* Organiza los elementos internos en columna */
-    align-items: center; /* Centra los elementos internos horizontalmente */
-    text-align: center; /* Asegura que el texto esté centrado */
+    /* Estilos para la distribución interna del panel */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-/*
-   Estilos específicos para la línea de Dispositivo.
-*/
 .data-container h3 {
-    margin-top: 5px; /* Pequeño margen superior */
-    margin-bottom: 10px; /* Margen inferior para separar de los datos */
-    font-size: 24px; /* Un poco más grande para el título del dispositivo */
-    color: #FFD700; /* Color amarillo para el título del dispositivo */
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #FFD700;
 }
 
-/*
-   Estilos para los párrafos de Temperatura y Humedad dentro de cada contenedor.
-   Queremos que el texto "Temperatura:" y el valor estén en la misma línea.
-*/
-#sensores-container p { /* Aplica a todos los párrafos dentro del contenedor de sensores */
-    margin: 5px 0; /* Espacio vertical reducido entre las líneas de texto */
-    font-size: 18px; /* Tamaño de fuente para las etiquetas "Temperatura:" y "Humedad:" */
-    display: flex; /* Convierte cada párrafo en un contenedor flexbox */
-    justify-content: center; /* Centra el contenido (etiqueta y valor) */
-    align-items: baseline; /* Alinea los ítems a la base de su línea de texto */
-    width: 100%; /* Asegura que ocupe el ancho completo dentro del panel */
+/* Estilos para los párrafos de Temperatura y Humedad dentro de cada contenedor. */
+#sensores-container p {
+    margin: 5px 0;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    width: 100%;
 }
 
-
-/*
-   Estilos para los valores numéricos de Temperatura y Humedad.
-   Queremos que el valor sea más grande y se destaque, pero en la misma línea que la etiqueta.
-*/
-#sensores-container .temperatura,
-#sensores-container .humedad {
+/* Estilos para los valores numéricos de Temperatura y Humedad. */
+/* Asegúrate de que tus <span> en HTML tengan las clases .temperatura-value y .humedad-value */
+#sensores-container .temperatura-value,
+#sensores-container .humedad-value {
     font-weight: bold;
-    font-size: 28px; /* Tamaño de fuente más grande para el valor */
-    color: #A0EEF3; /* Un color para destacar los valores numéricos */
-    margin-left: 8px; /* Espacio a la izquierda del número para separarlo de la etiqueta */
-    display: inline-block; /* Asegura que se comporte como un bloque pero permita texto alrededor */
-    width: auto; /* Permite que el span ocupe solo el ancho necesario */
-    text-align: left; /* Alinea el texto del valor a la izquierda si el span es más ancho */
+    font-size: 28px;
+    color: #A0EEF3; /* Color para destacar los valores numéricos */
+    margin-left: 8px;
+    display: inline-block;
+    width: auto;
+    text-align: left;
 }
 
-
-
-
-button {
+/* Estilos para los botones de encendido y apagado */
+button { /* Esto aplica estilos generales a TODOS los botones, si hay otros */
     margin: 10px;
     padding: 15px 25px;
     font-size: 18px;
@@ -91,16 +80,20 @@ button {
     transition: 0.3s;
 }
 
-button.on {
+/*
+   ESTILOS DE LOS BOTONES LED CORREGIDOS
+   Ahora los selectores apuntan a la clase 'led-button' y al atributo 'data-command'.
+*/
+button.led-button[data-command="on"] { /* Color verde para el botón ON */
     background-color: #22C55E;
     color: white;
 }
 
-button.off {
+button.led-button[data-command="off"] { /* Color rojo para el botón OFF */
     background-color: #EF4444;
     color: white;
 }
 
-button:hover {
+button.led-button:hover { /* Estilo al pasar el ratón por encima */
     opacity: 0.8;
 }
