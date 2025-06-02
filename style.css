@@ -4,6 +4,7 @@ body {
     margin: 20px;
     background: linear-gradient(135deg, #1E3A8A, #B91C1C); /* Degradado azul-rojo */
     color: white;
+    min-height: 100vh; /* Ocupe toda la pantalla */
 }
 
 h1 {
