@@ -111,12 +111,12 @@ client.on("message", async (topic, message) => {
 
 //Evitamos procesar mensajes de ambiente u otros valores no deseados
   if (!deviceId || deviceId === "ambiente") return;
-  
-  const container = getDeviceContainer(deviceId);
+
 
   if (dataType === "temperatura" || dataType === "humedad") {
     const obj   = JSON.parse(payload);
     const value = obj[dataType];
+    const container = getDeviceContainer(deviceId);
 
     // 1) Actualiza la User Interface
     container.querySelector(`.${dataType}`).innerText = value.toFixed(1);
