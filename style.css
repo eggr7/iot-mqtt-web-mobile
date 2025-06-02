@@ -4,7 +4,7 @@ body {
     margin: 20px;
     background: linear-gradient(135deg, #1E3A8A, #B91C1C); /* Degradado azul-rojo */
     color: white;
-    min-height: 100vh; /* Ocupe toda la pantalla */
+    min-height: 100vh;
 }
 
 h1 {
@@ -32,7 +32,6 @@ h1 {
     flex: 1;
     max-width: calc(50% - 10px);
 
-    /* Estilos para la distribución interna del panel */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +45,6 @@ h1 {
     color: #FFD700;
 }
 
-/* Estilos para los párrafos de Temperatura y Humedad dentro de cada contenedor. */
 #sensores-container p {
     margin: 5px 0;
     font-size: 18px;
@@ -56,21 +54,18 @@ h1 {
     width: 100%;
 }
 
-/* Estilos para los valores numéricos de Temperatura y Humedad. */
-/* Asegúrate de que tus <span> en HTML tengan las clases .temperatura-value y .humedad-value */
 #sensores-container .temperatura-value,
 #sensores-container .humedad-value {
     font-weight: bold;
     font-size: 28px;
-    color: #A0EEF3; /* Color para destacar los valores numéricos */
+    color: #A0EEF3;
     margin-left: 8px;
     display: inline-block;
     width: auto;
     text-align: left;
 }
 
-/* Estilos para los botones de encendido y apagado */
-button { /* Esto aplica estilos generales a TODOS los botones, si hay otros */
+button { /* Estilos generales para todos los botones */
     margin: 10px;
     padding: 15px 25px;
     font-size: 18px;
@@ -81,20 +76,136 @@ button { /* Esto aplica estilos generales a TODOS los botones, si hay otros */
     transition: 0.3s;
 }
 
-/*
-   ESTILOS DE LOS BOTONES LED CORREGIDOS
-   Ahora los selectores apuntan a la clase 'led-button' y al atributo 'data-command'.
-*/
-button.led-button[data-command="on"] { /* Color verde para el botón ON */
-    background-color: #22C55E;
+/* Estilos específicos para los botones del LED */
+button.led-button[data-command="on"] {
+    background-color: #22C55E; /* Verde */
     color: white;
 }
 
-button.led-button[data-command="off"] { /* Color rojo para el botón OFF */
-    background-color: #EF4444;
+button.led-button[data-command="off"] {
+    background-color: #EF4444; /* Rojo */
     color: white;
 }
 
-button.led-button:hover { /* Estilo al pasar el ratón por encima */
+button:hover {
     opacity: 0.8;
+}
+
+/* ------------------------------------------- */
+/* NUEVOS ESTILOS PARA LA SECCIÓN DE SUPABASE */
+/* ------------------------------------------- */
+
+.supabase-section {
+    background: rgba(255, 255, 255, 0.1); /* Fondo ligeramente visible */
+    padding: 25px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    max-width: 800px; /* Ancho máximo para las secciones de gestión */
+    text-align: center;
+}
+
+.supabase-section h3 {
+    font-size: 26px;
+    color: #ADD8E6; /* Azul claro para los títulos de sección */
+    margin-bottom: 20px;
+}
+
+.supabase-section input[type="number"],
+.supabase-section input[type="text"] {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    font-size: 1rem;
+    width: calc(33% - 10px); /* Intenta que los inputs quepan en 3 por línea */
+    max-width: 200px; /* Ancho máximo para inputs individuales */
+}
+
+/* Ajuste para inputs en pantallas pequeñas */
+@media (max-width: 600px) {
+    .supabase-section input[type="number"],
+    .supabase-section input[type="text"] {
+        width: calc(100% - 10px); /* 100% en pantallas pequeñas */
+    }
+}
+
+.supabase-section button {
+    background-color: #4CAF50; /* Verde general para botones de acción */
+    color: white;
+    margin: 10px 5px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.supabase-section button:hover {
+    background-color: #45a049;
+    opacity: 1; /* Asegura que el hover no solo reduzca opacidad */
+}
+
+/* Estilos específicos para la tabla de registros */
+#recordsTableContainer {
+    max-height: 400px; /* Altura máxima para la tabla con scroll */
+    overflow-y: auto; /* Permite scroll vertical */
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#recordsTableContainer table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina el espacio entre las celdas de la tabla */
+    color: white;
+    font-size: 0.9rem;
+}
+
+#recordsTableContainer th,
+#recordsTableContainer td {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    text-align: left;
+}
+
+#recordsTableContainer th {
+    background-color: rgba(255, 255, 255, 0.15);
+    font-weight: bold;
+    position: sticky; /* Hace que el encabezado se pegue al hacer scroll */
+    top: 0;
+    z-index: 1; /* Asegura que el encabezado esté por encima de los datos */
+}
+
+#recordsTableContainer tr:nth-child(even) { /* Color de fondo para filas pares */
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#recordsTableContainer tr:hover { /* Efecto hover en filas */
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Estilo para el botón de eliminar fila dentro de la tabla */
+.delete-row-btn {
+    background-color: #D32F2F; /* Rojo oscuro */
+    color: white;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.delete-row-btn:hover {
+    background-color: #B71C1C; /* Rojo más oscuro en hover */
+    opacity: 1;
+}
+
+#noRecordsMessage {
+    font-style: italic;
+    color: #CCCCCC;
+    margin-top: 15px;
 }
