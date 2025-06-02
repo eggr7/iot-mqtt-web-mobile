@@ -119,3 +119,9 @@ Este proyecto integral demuestra una solución completa de monitoreo de disposit
 * **`DEVICE_ID` único:** Recuerda que cada ESP32 debe tener un `DEVICE_ID` único en su `main.py` para que el frontend los muestre como dispositivos separados.
 
 ¡Con esta configuración, tu también tendrás un sistema de monitoreo IoT completo y funcional!
+
+## 📈 Diagrama de Secuencia del Flujo de Datos
+
+Aquí se ilustra el flujo de datos y la interacción entre los diferentes componentes del sistema de monitoreo IoT.
+
+![Diagrama de Flujo del Sistema IoT](images/flujo_iot.png)
