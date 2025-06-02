@@ -12,53 +12,89 @@ h1 {
     margin-bottom: 20px;
 }
 
-
-#sensores-container { 
+#sensores-container {
     margin: 20px auto;
-    display: flex;       /* Habilita Flexbox */
-    flex-wrap: wrap;     /* Permite que los elementos pasen a la siguiente línea */
-    justify-content: center; /* Centra los elementos horizontalmente */
-    gap: 20px;           /* Añade un espacio de 20px entre los elementos (horizontal y vertical) */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
-/*
-   Estilos para CADA PANEL DE SENSOR INDIVIDUAL.
-   La clase 'data-container' es la que el JavaScript asigna a cada div de sensor.
-   Fusionamos las propiedades de lo que antes era '.data-container' y '#sensores > div'.
-*/
 .data-container {
-    font-size: 20px; /* Ajustado para que coincida con lo que tenías en #sensores > div */
+    font-size: 20px;
     background: rgba(255, 255, 255, 0.2);
     padding: 15px;
     border-radius: 10px;
-    min-width: 200px; /* Asegura un ancho mínimo para cada tarjeta */
+    min-width: 200px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    flex: 1;
+    max-width: calc(50% - 10px);
 
-    /* Propiedades Flexbox para cada ítem dentro del contenedor */
-    box-sizing: border-box; /* Incluye padding y border en el ancho/alto total */
-    flex: 1; /* Permite que el elemento crezca y se encoja para ocupar el espacio disponible */
-    /* Controla el número de columnas:
-       - Para 2 columnas (con 20px de gap): calc(50% - 10px)
-       - Para 3 columnas (con 20px de gap): calc(33.33% - 13.33px)
-       - Puedes ajustar según tu preferencia. Empieza con 2 columnas.
-    */
-    max-width: calc(50% - 10px); /* Ejemplo: 2 columnas con un espacio de 20px */
+    /* NUEVOS ESTILOS PARA LA DISTRIBUCIÓN INTERNA DEL PANEL */
+    display: flex; /* Habilita flexbox para el contenido interno */
+    flex-direction: column; /* Organiza los elementos internos en columna */
+    align-items: center; /* Centra los elementos internos horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+}
+
+/*
+   Estilos específicos para la línea de Dispositivo.
+*/
+.data-container h3 {
+    margin-top: 5px; /* Pequeño margen superior */
+    margin-bottom: 10px; /* Margen inferior para separar de los datos */
+    font-size: 24px; /* Un poco más grande para el título del dispositivo */
+    color: #FFD700; /* Color amarillo para el título del dispositivo */
+}
+
+/*
+   Estilos para los párrafos de Temperatura y Humedad dentro de cada contenedor.
+   Queremos que el texto "Temperatura:" y el valor estén en la misma línea.
+*/
+#sensores-container p { /* Aplica a todos los párrafos dentro del contenedor de sensores */
+    margin: 5px 0; /* Espacio vertical reducido entre las líneas de texto */
+    font-size: 18px; /* Tamaño de fuente para las etiquetas "Temperatura:" y "Humedad:" */
+    display: flex; /* Convierte cada párrafo en un contenedor flexbox */
+    justify-content: center; /* Centra el contenido (etiqueta y valor) */
+    align-items: baseline; /* Alinea los ítems a la base de su línea de texto */
+    width: 100%; /* Asegura que ocupe el ancho completo dentro del panel */
 }
 
 
-/* Párrafos de Temperatura y Humedad dentro de cada contenedor dinámico */
-/* Corregido el ID de #sensores a #sensores-container para mayor especificidad */
+/*
+   Estilos para los valores numéricos de Temperatura y Humedad.
+   Queremos que el valor sea más grande y se destaque, pero en la misma línea que la etiqueta.
+*/
 #sensores-container .temperatura,
 #sensores-container .humedad {
     font-weight: bold;
-    font-size: 24px;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    margin: 5px 0;
+    font-size: 28px; /* Tamaño de fuente más grande para el valor */
+    color: #A0EEF3; /* Un color para destacar los valores numéricos */
+    margin-left: 8px; /* Espacio a la izquierda del número para separarlo de la etiqueta */
+    display: inline-block; /* Asegura que se comporte como un bloque pero permita texto alrededor */
+    width: auto; /* Permite que el span ocupe solo el ancho necesario */
+    text-align: left; /* Alinea el texto del valor a la izquierda si el span es más ancho */
 }
 
-/* Estilos de botones (se mantienen sin cambios funcionales) */
+/* Ajuste para el sufijo de grados Celsius y porcentaje */
+#sensores-container .temperatura::after {
+    content: " °C"; /* Añade el sufijo °C después del número */
+    font-size: 18px; /* Tamaño de fuente más pequeño para la unidad */
+    font-weight: normal; /* Normaliza el peso de la fuente */
+    margin-left: 2px; /* Espacio entre el número y la unidad */
+    color: white; /* Color de la unidad */
+}
+
+#sensores-container .humedad::after {
+    content: " %"; /* Añade el sufijo % después del número */
+    font-size: 18px;
+    font-weight: normal;
+    margin-left: 2px;
+    color: white;
+}
+
+
 button {
     margin: 10px;
     padding: 15px 25px;
@@ -84,7 +120,6 @@ button:hover {
     opacity: 0.8;
 }
 
-/* Estilo del contenedor del gráfico (se mantiene sin cambios) */
 #chart-container {
     width: 90%;
     max-width: 800px;
