@@ -133,3 +133,43 @@ Este proyecto integral demuestra una solución completa de monitoreo de disposit
 Aquí se ilustra el flujo de datos y la interacción entre los diferentes componentes del sistema de monitoreo IoT.
 
 ![Diagrama de Flujo del Sistema IoT](images/flujo_iot.png)
+
+## Modelo Conceptual del Proyecto
+
+Este diagrama ilustra las interacciones y el flujo de datos entre los distintos componentes del sistema de monitoreo y control IoT, desde la lectura de sensores hasta la visualización, control y persistencia de datos.
+
+![Modelo Conceptual](images/mcmqtt.png)
+
+
+Participantes Clave:
+
+- ESP32: El microcontrolador que actúa como dispositivo IoT, leyendo sensores y controlando actuadores.
+- MQTT Broker (EMQX): El servidor central que gestiona la comunicación en tiempo real entre todos los dispositivos y clientes.
+- Frontend Web: La aplicación web basada en HTML, CSS y JavaScript que se ejecuta en el navegador, ofreciendo una interfaz de usuario completa.
+- Cliente Móvil (React Native): La aplicación móvil que solo suscribe y muestra datos de sensores.
+Supabase DB: La base de datos en la nube donde se almacenan los registros de los sensores de forma persistente.
+- Usuario: La persona que interactúa con las interfaces web y móvil.
+- Actuador LED (en ESP32): El componente físico controlado por el ESP32.
+
+Descripción Detallada del Flujo (Numeración según el Diagrama):
+
+1. Establecimiento de Conexiones y Suscripciones:
+
+- 1a. Frontend Web se Conecta y Suscribe: El Frontend Web inicia una conexión segura (WSS) con el MQTT Broker (EMQX) y se suscribe al tópico genérico sensores/# para recibir datos de temperatura y humedad de cualquier dispositivo. Aqui también el Frontend Web es capaz de apagar el LED remotamente. 
+- 1b. Cliente Móvil se Conecta y Suscribe: De manera similar, el Cliente Móvil establece su conexión segura con el MQTT Broker y se suscribe al mismo tópico sensores/# para monitorear los datos.
+- 1c. ESP32 se Conecta: El microcontrolador ESP32 establece una conexión con el MQTT Broker para iniciar la comunicación.
+
+2. Lectura de Sensores y Publicación MQTT:
+
+- 2. ESP32 Publica Temperatura y Humedad: El ESP32 lee la temperatura y humedad del sensor DHT22 y publica el valor al MQTT Broker en un tópico específico, por ejemplo, sensores/esp32_1/temperatura.
+
+3. Recepción, Visualización y Almacenamiento de Datos:
+
+- 3a. Broker Envía a Frontend Web y al Cliente Móvil: El MQTT Broker reenvía el mensaje de temperatura y humedad al Frontend Web y al Cliente Móvil, ya que están suscritos al tópico.
+
+- 3b. Frontend Web Actualiza UI: El Frontend Web procesa los datos y actualiza la interfaz de usuario para mostrar la temperatura y humedad en el panel dinámico del dispositivo correspondiente.
+
+- 3c. Cliente Móvil Actualiza UI: El Cliente Móvil procesa los datos y actualiza su interfaz de usuario para mostrar la temperatura y humedad.
+
+- 3e. Frontend Web Inserta en Supabase: Además de mostrar los datos, el Frontend Web inserta un nuevo registro en la tabla measurements de Supabase, incluyendo la temperatura, humedad, y el ID del dispositivo.
+

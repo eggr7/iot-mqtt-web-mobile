@@ -7,9 +7,7 @@ const clientSupabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 // -------------------------------
 // Configuración de conexión MQTT
 // -------------------------------
-// -------------------------------
-// Configuración de conexión MQTT
-// -------------------------------
+
 const broker = "wss://broker.emqx.io:8084/mqtt"; //
 const BASE_TOPIC = "sensores"; //
 
@@ -108,7 +106,7 @@ client.on("message", async (topic, message) => { //
         const { data, error } = await clientSupabase //
             .from('measurements') //
             .insert([{ //
-                created_at: new Date().toISOString(), // Asumo que el nombre de tu columna es 'created_at'
+                created_at: new Date().toISOString(), 
                 temperature: obj.temperatura, //
                 humidity: obj.humedad, //
                 device_id: deviceId //
@@ -176,8 +174,7 @@ async function loadAllRecords() { //
                 row.insertCell(3).textContent = `${record.temperature} °C`; //
                 row.insertCell(4).textContent = `${record.humidity} %`; //
                 const actionsCell = row.insertCell(5); //
-                
-                // Botón de eliminar directo en la fila (opcional, para conveniencia)
+                // Botón para modificar el registro dentro de la tabla
                 const deleteRowBtn = document.createElement('button'); //
                 deleteRowBtn.textContent = 'Eliminar'; //
                 deleteRowBtn.className = 'delete-row-btn'; // Para estilos
@@ -225,8 +222,8 @@ async function updateRecord() { //
 }
 
 // Función para eliminar un registro
-async function deleteRecord(idToDelete) { //
-    const id = idToDelete || deleteIdInput.value; // Usa el ID pasado o el del input
+async function deleteRecord(idToDelete) { 
+    const id = idToDelete || deleteIdInput.value;  // Obtener ID del input o del parámetro
 
     if (!id) { //
         alert('Por favor, ingresa un ID válido para eliminar.'); //
@@ -258,7 +255,7 @@ async function deleteRecord(idToDelete) { //
 // Asignar Event Listeners a los botones
 loadRecordsBtn.addEventListener('click', loadAllRecords); //
 updateRecordBtn.addEventListener('click', updateRecord); //
-// deleteRecordBtn.addEventListener('click', deleteRecord); // ELIMINAR ESTA LÍNEA
+// deleteRecordBtn.addEventListener('click', deleteRecord); // Deshabilitado por ahora
 
 // Cargar registros al iniciar la página
 document.addEventListener('DOMContentLoaded', loadAllRecords); //
