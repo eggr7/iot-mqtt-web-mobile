@@ -12,48 +12,44 @@ h1 {
     margin-bottom: 20px;
 }
 
-.data-container {
-    font-size: 24px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 15px;
-    display: inline-block;
-    border-radius: 10px;
-}
 
-#temp, #hum {
-    font-size: 48px;
-    font-weight: bold;
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Estilos para los contenedores dinámicos de cada ESP32 */
-#sensores {
+#sensores-container { 
     margin: 20px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    display: flex;       /* Habilita Flexbox */
+    flex-wrap: wrap;     /* Permite que los elementos pasen a la siguiente línea */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 20px;           /* Añade un espacio de 20px entre los elementos (horizontal y vertical) */
 }
-#sensores > div {
-    font-size: 20px;
+
+/*
+   Estilos para CADA PANEL DE SENSOR INDIVIDUAL.
+   La clase 'data-container' es la que el JavaScript asigna a cada div de sensor.
+   Fusionamos las propiedades de lo que antes era '.data-container' y '#sensores > div'.
+*/
+.data-container {
+    font-size: 20px; /* Ajustado para que coincida con lo que tenías en #sensores > div */
     background: rgba(255, 255, 255, 0.2);
     padding: 15px;
     border-radius: 10px;
-    min-width: 200px;
+    min-width: 200px; /* Asegura un ancho mínimo para cada tarjeta */
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-#sensores h3 {
-    margin-top: 0;
-    font-size: 22px;
+
+    /* Propiedades Flexbox para cada ítem dentro del contenedor */
+    box-sizing: border-box; /* Incluye padding y border en el ancho/alto total */
+    flex: 1; /* Permite que el elemento crezca y se encoja para ocupar el espacio disponible */
+    /* Controla el número de columnas:
+       - Para 2 columnas (con 20px de gap): calc(50% - 10px)
+       - Para 3 columnas (con 20px de gap): calc(33.33% - 13.33px)
+       - Puedes ajustar según tu preferencia. Empieza con 2 columnas.
+    */
+    max-width: calc(50% - 10px); /* Ejemplo: 2 columnas con un espacio de 20px */
 }
 
-/* Párrafos dentro de cada contenedor dinámico */
-#sensores .temperatura,
-#sensores .humedad {
+
+/* Párrafos de Temperatura y Humedad dentro de cada contenedor dinámico */
+/* Corregido el ID de #sensores a #sensores-container para mayor especificidad */
+#sensores-container .temperatura,
+#sensores-container .humedad {
     font-weight: bold;
     font-size: 24px;
     display: inline-block;
@@ -62,6 +58,7 @@ h1 {
     margin: 5px 0;
 }
 
+/* Estilos de botones (se mantienen sin cambios funcionales) */
 button {
     margin: 10px;
     padding: 15px 25px;
@@ -87,6 +84,7 @@ button:hover {
     opacity: 0.8;
 }
 
+/* Estilo del contenedor del gráfico (se mantiene sin cambios) */
 #chart-container {
     width: 90%;
     max-width: 800px;

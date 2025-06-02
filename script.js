@@ -148,12 +148,8 @@ client.on("message", async (topic, message) => {
             container.querySelector(`.humedad`).innerText = humValue.toFixed(1);
         }
 
-        // Solo actualiza el gráfico si tienes ambos datos, o ajusta updateChart para manejar un solo valor
-        // Para simplificar, asumiremos que los mensajes de temperatura y humedad
-        // pueden llegar de forma independiente y que el gráfico espera ambos
-        // Si siempre vienen juntos en el mismo JSON, esta parte está bien.
-        // Si llegan por separado, necesitarías almacenar el último valor de cada uno.
-        // Por ahora, pasamos los valores disponibles.
+// Actualiza el gráfico con los valores de temperatura y humedad
+        // Asegúrate de que ambos valores son números antes de actualizar el gráfico
         updateChart(tempValue, humValue);
 
 
@@ -175,10 +171,6 @@ client.on("message", async (topic, message) => {
     }
     else if (dataType === "led") {
         console.log(`Estado LED de ${deviceId}: ${payload}`);
-        // Si el ESP32 publica el estado del LED, puedes usarlo aquí para actualizar
-        // visualmente el botón, por ejemplo, cambiando su clase o texto.
-        // const button = getDeviceContainer(deviceId).querySelector(`.led-button[data-device-id="${deviceId}"][data-command="${payload}"]`);
-        // if (button) { /* actualiza el botón */ }
     }
 });
 
