@@ -88,9 +88,9 @@ Este proyecto integral demuestra una solución completa de monitoreo de disposit
             * Expresión USING: `true`
     * **Nota de seguridad:** Usar `true` en las expresiones de RLS permite acceso completo al rol `anon`. En una aplicación real, estas políticas deben ser mucho más restrictivas (ej., `auth.uid() = user_id` para permitir que los usuarios solo accedan a sus propios datos).
 
-<p align="center">
-![Politicas RLS de Supabase](images/policiessupabase.png)
-</p>
+<div style="text-align: center;">
+  ![Politicas RLS de Supabase](images/policiessupabase.png)
+</div>
 
 5. Revisar los datos registrados en la tabla
 
@@ -150,9 +150,9 @@ Supabase DB: La base de datos en la nube donde se almacenan los registros de los
 - Usuario: La persona que interactúa con las interfaces web y móvil.
 - Actuador LED (en ESP32): El componente físico controlado por el ESP32.
 
-<p align="center">
+<div style="text-align: center;">
   ![Modelo Conceptual](images/mcmqtt.png)
-</p>
+</div>
 
 Descripción Detallada del Flujo (Numeración según el Diagrama):
 
