@@ -77,22 +77,7 @@ h1 {
     text-align: left; /* Alinea el texto del valor a la izquierda si el span es más ancho */
 }
 
-/* Ajuste para el sufijo de grados Celsius y porcentaje */
-#sensores-container .temperatura::after {
-    content: " °C"; /* Añade el sufijo °C después del número */
-    font-size: 18px; /* Tamaño de fuente más pequeño para la unidad */
-    font-weight: normal; /* Normaliza el peso de la fuente */
-    margin-left: 2px; /* Espacio entre el número y la unidad */
-    color: white; /* Color de la unidad */
-}
 
-#sensores-container .humedad::after {
-    content: " %"; /* Añade el sufijo % después del número */
-    font-size: 18px;
-    font-weight: normal;
-    margin-left: 2px;
-    color: white;
-}
 
 
 button {
