@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Monitor MQTT</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script> 
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
@@ -20,6 +20,44 @@
     <h2>📋 Sensores Dinámicos con Wildcards</h2>
     <div id="sensores-container">
         <p id="sin-sensores">🔍 Esperando datos de sensores...</p>
+    </div>
+
+    <hr> <h2>📊 Gestión de Datos Supabase (Tabla: measurements)</h2>
+
+    <div class="supabase-section">
+        <h3>Consultar Registros</h3>
+        <button id="loadRecordsBtn">Cargar Todos los Registros</button>
+        <div id="recordsTableContainer">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Timestamp</th>
+                        <th>Device ID</th>
+                        <th>Temperatura</th>
+                        <th>Humedad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="recordsTableBody">
+                    </tbody>
+            </table>
+            <p id="noRecordsMessage">No hay registros para mostrar.</p>
+        </div>
+    </div>
+
+    <div class="supabase-section">
+        <h3>Modificar Registro por ID</h3>
+        <input type="number" id="editIdInput" placeholder="ID del registro a modificar">
+        <input type="number" id="editTempInput" step="0.1" placeholder="Nueva Temperatura">
+        <input type="number" id="editHumInput" step="0.1" placeholder="Nueva Humedad">
+        <button id="updateRecordBtn">Modificar Registro</button>
+    </div>
+
+    <div class="supabase-section">
+        <h3>Eliminar Registro por ID</h3>
+        <input type="number" id="deleteIdInput" placeholder="ID del registro a eliminar">
+        <button id="deleteRecordBtn">Eliminar Registro</button>
     </div>
 
     <script type="module" src="script.js"></script>
