@@ -115,7 +115,7 @@ client.on("message", async (topic, message) => { //
         const { data, error } = await clientSupabase //
             .from('measurements') // Nombre de nuestra tabla en Supabase
             .insert([{ //
-                timestamp: new Date().toISOString(), //
+                created_at: new Date().toISOString(), //
                 temperature: obj.temperatura, //
                 humidity: obj.humedad, //
                 device_id: deviceId //
