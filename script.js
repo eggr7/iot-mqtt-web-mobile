@@ -1,6 +1,6 @@
 // --- Supabase setup ---
-import { SUPABASE_URL, SUPABASE_ANON } from './config.js';
-
+const SUPABASE_URL    = 'https://jewkdyheholhvafarbhl.supabase.co';
+const SUPABASE_ANON   = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impld2tkeWhlaG9saHZhZmFyYmhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0MjM5MjQsImV4cCI6MjA2Mjk5OTkyNH0.jVSQiC3yZ8xHqb4jaeiSlIEDG3TUwiR1MF9dJLWErvc';
 const clientSupabase      = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
 
