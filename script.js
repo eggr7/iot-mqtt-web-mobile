@@ -7,22 +7,25 @@ const clientSupabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 // -------------------------------
 // Configuración de conexión MQTT
 // -------------------------------
-const broker = "wss://broker.emqx.io:8084/mqtt";
-const BASE_TOPIC = "sensores";
+// -------------------------------
+// Configuración de conexión MQTT
+// -------------------------------
+const broker = "wss://broker.emqx.io:8084/mqtt"; //
+const BASE_TOPIC = "sensores"; //
 
-const topicTempWildcard = `${BASE_TOPIC}/+/temperatura`;
-const topicAllWildcard = `${BASE_TOPIC}/#`;
+const topicTempWildcard = `${BASE_TOPIC}/+/temperatura`; //
+const topicAllWildcard = `${BASE_TOPIC}/#`; //
 
-const client = mqtt.connect(broker);
+const client = mqtt.connect(broker); //
 
 // Inicia monitoreo automáticamente al conectar
-client.on("connect", () => {
-    console.log("Conectado al broker MQTT");
-    client.subscribe(topicTempWildcard, (err) => {
-        if (!err) console.log("Suscrito a", topicTempWildcard);
+client.on("connect", () => { //
+    console.log("Conectado al broker MQTT"); //
+    client.subscribe(topicTempWildcard, (err) => { //
+        if (!err) console.log("Suscrito a", topicTempWildcard); //
     });
-    client.subscribe(topicAllWildcard, (err) => {
-        if (!err) console.log("Suscrito a", topicAllWildcard);
+    client.subscribe(topicAllWildcard, (err) => { //
+        if (!err) console.log("Suscrito a", topicAllWildcard); //
     });
 });
 
@@ -100,9 +103,10 @@ client.on("message", async (topic, message) => { //
             humSpan.innerText = `${obj.humedad.toFixed(1)} %`; //
         }
 
+
         // 2) Inserta en Supabase
         const { data, error } = await clientSupabase //
-            .from('measurements') // Nombre de nuestra tabla en Supabase
+            .from('measurements') //
             .insert([{ //
                 created_at: new Date().toISOString(), // Asumo que el nombre de tu columna es 'created_at'
                 temperature: obj.temperatura, //
@@ -134,127 +138,127 @@ function sendCommand(deviceId, command) { //
 // -------------------------------
 
 // Elementos HTML de la nueva sección
-const loadRecordsBtn = document.getElementById('loadRecordsBtn');
-const recordsTableBody = document.getElementById('recordsTableBody');
-const noRecordsMessage = document.getElementById('noRecordsMessage');
+const loadRecordsBtn = document.getElementById('loadRecordsBtn'); //
+const recordsTableBody = document.getElementById('recordsTableBody'); //
+const noRecordsMessage = document.getElementById('noRecordsMessage'); //
 
-const editIdInput = document.getElementById('editIdInput');
-const editTempInput = document.getElementById('editTempInput');
-const editHumInput = document.getElementById('editHumInput');
-const updateRecordBtn = document.getElementById('updateRecordBtn');
+const editIdInput = document.getElementById('editIdInput'); //
+const editTempInput = document.getElementById('editTempInput'); //
+const editHumInput = document.getElementById('editHumInput'); //
+const updateRecordBtn = document.getElementById('updateRecordBtn'); //
 
-const deleteIdInput = document.getElementById('deleteIdInput');
-const deleteRecordBtn = document.getElementById('deleteRecordBtn');
+// const deleteIdInput = document.getElementById('deleteIdInput'); //
+// const deleteRecordBtn = document.getElementById('deleteRecordBtn'); //
 
 // Función para cargar y mostrar todos los registros
-async function loadAllRecords() {
-    console.log('Cargando registros de Supabase...');
-    const { data, error } = await clientSupabase
-        .from('measurements')
-        .select('*')
+async function loadAllRecords() { //
+    console.log('Cargando registros de Supabase...'); //
+    const { data, error } = await clientSupabase //
+        .from('measurements') //
+        .select('*') //
         .order('created_at', { ascending: false }); // Ordenar por fecha de creación descendente
 
-    if (error) {
-        console.error('Error al cargar registros:', error);
-        recordsTableBody.innerHTML = '<tr><td colspan="6">Error al cargar registros.</td></tr>';
-        noRecordsMessage.style.display = 'block';
-    } else {
+    if (error) { //
+        console.error('Error al cargar registros:', error); //
+        recordsTableBody.innerHTML = '<tr><td colspan="6">Error al cargar registros.</td></tr>'; //
+        noRecordsMessage.style.display = 'block'; //
+    } else { //
         recordsTableBody.innerHTML = ''; // Limpiar tabla
-        if (data.length === 0) {
-            noRecordsMessage.style.display = 'block';
-        } else {
-            noRecordsMessage.style.display = 'none';
-            data.forEach(record => {
-                const row = recordsTableBody.insertRow();
-                row.insertCell(0).textContent = record.id;
-                row.insertCell(1).textContent = new Date(record.created_at).toLocaleString();
-                row.insertCell(2).textContent = record.device_id;
-                row.insertCell(3).textContent = `${record.temperature} °C`;
-                row.insertCell(4).textContent = `${record.humidity} %`;
-                const actionsCell = row.insertCell(5);
+        if (data.length === 0) { //
+            noRecordsMessage.style.display = 'block'; //
+        } else { //
+            noRecordsMessage.style.display = 'none'; //
+            data.forEach(record => { //
+                const row = recordsTableBody.insertRow(); //
+                row.insertCell(0).textContent = record.id; //
+                row.insertCell(1).textContent = new Date(record.created_at).toLocaleString(); //
+                row.insertCell(2).textContent = record.device_id; //
+                row.insertCell(3).textContent = `${record.temperature} °C`; //
+                row.insertCell(4).textContent = `${record.humidity} %`; //
+                const actionsCell = row.insertCell(5); //
                 
                 // Botón de eliminar directo en la fila (opcional, para conveniencia)
-                const deleteRowBtn = document.createElement('button');
-                deleteRowBtn.textContent = 'Eliminar';
+                const deleteRowBtn = document.createElement('button'); //
+                deleteRowBtn.textContent = 'Eliminar'; //
                 deleteRowBtn.className = 'delete-row-btn'; // Para estilos
-                deleteRowBtn.onclick = async () => {
-                    if (confirm(`¿Estás seguro de que quieres eliminar el registro con ID ${record.id}?`)) {
-                        await deleteRecord(record.id);
+                deleteRowBtn.onclick = async () => { //
+                    if (confirm(`¿Estás seguro de que quieres eliminar el registro con ID ${record.id}?`)) { //
+                        await deleteRecord(record.id); //
                         loadAllRecords(); // Recargar tabla después de eliminar
                     }
                 };
-                actionsCell.appendChild(deleteRowBtn);
+                actionsCell.appendChild(deleteRowBtn); //
             });
         }
     }
 }
 
 // Función para modificar un registro
-async function updateRecord() {
-    const id = editIdInput.value;
-    const newTemp = parseFloat(editTempInput.value);
-    const newHum = parseFloat(editHumInput.value);
+async function updateRecord() { //
+    const id = editIdInput.value; //
+    const newTemp = parseFloat(editTempInput.value); //
+    const newHum = parseFloat(editHumInput.value); //
 
-    if (!id || isNaN(newTemp) || isNaN(newHum)) {
-        alert('Por favor, ingresa un ID, temperatura y humedad válidos para modificar.');
-        return;
+    if (!id || isNaN(newTemp) || isNaN(newHum)) { //
+        alert('Por favor, ingresa un ID, temperatura y humedad válidos para modificar.'); //
+        return; //
     }
 
-    console.log(`Modificando registro ${id} con Temp: ${newTemp}, Hum: ${newHum}`);
+    console.log(`Modificando registro ${id} con Temp: ${newTemp}, Hum: ${newHum}`); //
 
-    const { data, error } = await clientSupabase
-        .from('measurements')
-        .update({ temperature: newTemp, humidity: newHum })
+    const { data, error } = await clientSupabase //
+        .from('measurements') //
+        .update({ temperature: newTemp, humidity: newHum }) //
         .eq('id', id); // 'eq' significa 'equals' (igual a)
 
-    if (error) {
-        console.error('Error al modificar registro:', error);
-        alert('Error al modificar el registro: ' + error.message);
-    } else {
-        console.log('Registro modificado:', data);
-        alert('Registro modificado correctamente.');
-        editIdInput.value = '';
-        editTempInput.value = '';
-        editHumInput.value = '';
+    if (error) { //
+        console.error('Error al modificar registro:', error); //
+        alert('Error al modificar el registro: ' + error.message); //
+    } else { //
+        console.log('Registro modificado:', data); //
+        alert('Registro modificado correctamente.'); //
+        editIdInput.value = ''; //
+        editTempInput.value = ''; //
+        editHumInput.value = ''; //
         loadAllRecords(); // Recargar tabla después de modificar
     }
 }
 
 // Función para eliminar un registro
-async function deleteRecord(idToDelete) {
+async function deleteRecord(idToDelete) { //
     const id = idToDelete || deleteIdInput.value; // Usa el ID pasado o el del input
 
-    if (!id) {
-        alert('Por favor, ingresa un ID válido para eliminar.');
-        return;
+    if (!id) { //
+        alert('Por favor, ingresa un ID válido para eliminar.'); //
+        return; //
     }
 
-    if (!idToDelete && !confirm(`¿Estás seguro de que quieres eliminar el registro con ID ${id}?`)) {
+    if (!idToDelete && !confirm(`¿Estás seguro de que quieres eliminar el registro con ID ${id}?`)) { //
         return; // Si es confirmación manual, no eliminar si cancela
     }
 
-    console.log(`Eliminando registro con ID: ${id}`);
+    console.log(`Eliminando registro con ID: ${id}`); //
 
-    const { data, error } = await clientSupabase
-        .from('measurements')
-        .delete()
-        .eq('id', id);
+    const { data, error } = await clientSupabase //
+        .from('measurements') //
+        .delete() //
+        .eq('id', id); //
 
-    if (error) {
-        console.error('Error al eliminar registro:', error);
-        alert('Error al eliminar el registro: ' + error.message);
-    } else {
-        console.log('Registro eliminado:', data);
-        alert('Registro eliminado correctamente.');
-        deleteIdInput.value = '';
+    if (error) { //
+        console.error('Error al eliminar registro:', error); //
+        alert('Error al eliminar el registro: ' + error.message); //
+    } else { //
+        console.log('Registro eliminado:', data); //
+        alert('Registro eliminado correctamente.'); //
+        deleteIdInput.value = ''; //
         loadAllRecords(); // Recargar tabla después de eliminar
     }
 }
 
 // Asignar Event Listeners a los botones
-loadRecordsBtn.addEventListener('click', loadAllRecords);
-updateRecordBtn.addEventListener('click', updateRecord);
-deleteRecordBtn.addEventListener('click', deleteRecord);
+loadRecordsBtn.addEventListener('click', loadAllRecords); //
+updateRecordBtn.addEventListener('click', updateRecord); //
+// deleteRecordBtn.addEventListener('click', deleteRecord); // ELIMINAR ESTA LÍNEA
 
 // Cargar registros al iniciar la página
-document.addEventListener('DOMContentLoaded', loadAllRecords);
+document.addEventListener('DOMContentLoaded', loadAllRecords); //
