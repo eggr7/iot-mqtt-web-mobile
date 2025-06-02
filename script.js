@@ -106,9 +106,9 @@ client.on("message", async (topic, message) => { //
 
         // 2) Actualiza el gráfico con los datos de este dispositivo
         // Solo llamar a updateChart si ambos valores están disponibles en el mismo payload (como en tu ESP32)
-        if (obj.temperatura !== undefined && obj.humedad !== undefined) { //
-            updateChart(deviceId, obj.temperatura, obj.humedad); //
-        }
+        //if (obj.temperatura !== undefined && obj.humedad !== undefined) { //
+        //    updateChart(deviceId, obj.temperatura, obj.humedad); //
+      //  }
 
 
         // 3) Inserta en Supabase
