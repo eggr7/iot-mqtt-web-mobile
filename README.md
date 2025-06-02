@@ -88,6 +88,14 @@ Este proyecto integral demuestra una solución completa de monitoreo de disposit
             * Expresión USING: `true`
     * **Nota de seguridad:** Usar `true` en las expresiones de RLS permite acceso completo al rol `anon`. En una aplicación real, estas políticas deben ser mucho más restrictivas (ej., `auth.uid() = user_id` para permitir que los usuarios solo accedan a sus propios datos).
 
+![Politicas RLS de Supabase](images/policiessupabase.png)
+
+5. Revisar los datos registrados en la tabla
+
+![datosalmacenados](images/databasesupabase.png)
+
+
+
 ### 3. Configuración del Frontend Web (HTML, CSS, JavaScript)
 
 1.  **`index.html`:**
