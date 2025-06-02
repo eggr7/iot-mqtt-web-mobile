@@ -7,7 +7,7 @@ const clientSupabase      = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 // -------------------------------
 // Configuración de conexión
 // -------------------------------
-const broker     = "wss://broker.emqx.io:8083/mqtt";
+const broker     = "wss://broker.emqx.io:8083";
 const BASE_TOPIC = "sensores";
 
 const topicTempWildcard = `${BASE_TOPIC}/+/temperatura`;
