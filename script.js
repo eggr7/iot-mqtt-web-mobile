@@ -109,6 +109,9 @@ client.on("message", async (topic, message) => {
   const dataType = parts[2];
   const payload  = message.toString();
 
+//Evitamos procesar mensajes de ambiente u otros valores no deseados
+  if (!deviceId || deviceId === "ambiente") return;
+  
   const container = getDeviceContainer(deviceId);
 
   if (dataType === "temperatura" || dataType === "humedad") {
